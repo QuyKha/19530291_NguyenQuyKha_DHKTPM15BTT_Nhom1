@@ -1,7 +1,8 @@
 package com.example._NguyenQuyKha_KTTKPM_GK.rest;
 
 import com.example._NguyenQuyKha_KTTKPM_GK.entity.Subject;
-
+import com.example._NguyenQuyKha_KTTKPM_GK.service.ListenService;
+import com.example._NguyenQuyKha_KTTKPM_GK.service.SendService;
 import com.example._NguyenQuyKha_KTTKPM_GK.service.SubjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,13 @@ import java.util.Properties;
 public class SubjectRestController {
     @Autowired
     private SubjectService subjectService;
+    
+    @Autowired
+    private SendService sendService;
+
+    @Autowired
+    private ListenService listenService;
+
 
 
     public String p = null;
@@ -38,6 +46,17 @@ public class SubjectRestController {
     @PostMapping("/subject")
     public Subject addProduct(@RequestBody Subject subject) {
         return subjectService.addSubject(subject);
+    }
+    
+    @PostMapping("/sendSubjectNew/{id}")
+    public String sendProductNew(@PathVariable int id) {
+        Subject subject = subjectService.getSubject(id);
+        return sendService.SendSubject(subject);
+    }
+
+    @GetMapping("/receiveSubjectNew")
+    public Subject receiveProductNew()  {
+        return listenService.receiveSubject();
     }
 
 }
