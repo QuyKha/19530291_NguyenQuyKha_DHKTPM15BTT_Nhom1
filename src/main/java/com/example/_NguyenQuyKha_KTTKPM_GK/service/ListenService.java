@@ -17,7 +17,7 @@ public class ListenService {
 		this.subject = subject;
 		System.out.println(subject);
 	}
-	public Subject receiveProduct() {
+	public Subject receiveSubject() {
 		// TODO Auto-generated method stub
 		return subject;
 	}
